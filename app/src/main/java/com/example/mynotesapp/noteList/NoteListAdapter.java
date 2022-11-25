@@ -16,9 +16,9 @@ import com.example.mynotesapp.R;
 import java.util.List;
 
 public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHolder> {
-    CardListData[] listData;
+    List<CardListData> listData;
 
-    public NoteListAdapter(CardListData[] listdata) {
+    public NoteListAdapter(List<CardListData> listdata) {
         this.listData = listdata;
     }
 
@@ -34,13 +34,13 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull NoteListAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        final CardListData cardData = listData[position];
-        holder.title.setText(listData[position].getTitle());
-        holder.note.setText(listData[position].getNote());
+        final CardListData cardData = listData.get(position);
+        holder.title.setText(listData.get(position).getTitle());
+        holder.note.setText(listData.get(position).getNote());
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "clicked on note: "+listData[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "clicked on note: "+listData.get(position).getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -49,7 +49,7 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return listData.length;
+        return listData.size();
     }
 
 

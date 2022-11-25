@@ -19,7 +19,7 @@ import java.io.Serializable;
 public class NoteTaker extends AppCompatActivity implements Serializable {
     EditText title, note;
     ImageView save;
-    AppDataBase dataBase = null;
+    AppDataBase dataBase ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class NoteTaker extends AppCompatActivity implements Serializable {
         title = findViewById(R.id.title);
         note = findViewById(R.id.note);
         save = findViewById(R.id.saveBtn);
+
+        dataBase = AppDataBase.getInstance(this);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,15 +51,13 @@ public class NoteTaker extends AppCompatActivity implements Serializable {
                     Toast.makeText(NoteTaker.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
 
-
-
                 //start an intent
-                Intent intent = new Intent();
+                Intent intent = new Intent(NoteTaker.this,MainActivity.class);
                 intent.putExtra("note",actualNote);
-                setResult(Activity.RESULT_OK,intent);
-                finish();
-            }
+                startActivity(intent);
+                finish();}
         });
 
-    }
+
+}
 }
